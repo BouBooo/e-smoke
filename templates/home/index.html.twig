@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<style>
+    h4 { font-size: 18px; }
+    .container { display:flex; justify-content: space-between; }
+    .block { padding: 15px 10px 15px 10px; }
+    .block img:hover { background-color: #C1C3C1; }
+</style>
+
+<div class="jumbotron">
+    <div class="container">
+        <div class="block"> 
+            <h4>4.8/5 - AVIS CLIENTS</h4>
+            <p> + De 50 000 vapoteurs satisfaits !</p>
+        </div>
+
+        <div class="block">
+            <h4>LIVRAISON GRATUITE</h4>
+            <p>Sans minimum d'achat</p>
+        </div>
+
+        <div class="block">
+            <h4>LIVRAISON EXPRESS</h4>
+            <p>Expédition le jour même avant 14h00</p>
+        </div>
+
+        <div class="block">
+            <h4>PAIEMENT 100% SÉCURISÉ</h4>
+            <p>CB, VISA, Paypal...</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="container mt-4">
+    <div class="block">
+        <img src="{{ asset('assets/img/home_1.png') }}" />
+    </div>
+
+    <div class="block">
+        <img src="{{ asset('assets/img/home_2.png') }}" />
+    </div>
+</div>
+{% endblock %}
