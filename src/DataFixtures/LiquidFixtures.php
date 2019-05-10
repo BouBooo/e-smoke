@@ -36,7 +36,8 @@ class LiquidFixtures extends Fixture
                         ->setFlavor($faker->words(2, true))
                         ->setPrice($faker->randomDigit())
                         ->setCategory($category)
-                        ->setMark($mark);
+                        ->setMark($mark)
+                        ->setImage($faker->imageUrl());
 
                     $manager->persist($liquid);
                 }

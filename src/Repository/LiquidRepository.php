@@ -19,22 +19,24 @@ class LiquidRepository extends ServiceEntityRepository
         parent::__construct($registry, Liquid::class);
     }
 
-    // /**
-    //  * @return Liquid[] Returns an array of Liquid objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findLatest()
     {
         return $this->createQueryBuilder('l')
-            ->andWhere('l.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('l.id', 'ASC')
-            ->setMaxResults(10)
+            ->orderBy('l.id', 'DESC')
+            ->setMaxResults(4)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
+
+    public function findAllQuery()
+    {
+        return $this->createQueryBuilder('l')
+            ->orderBy('l.id', 'DESC')
+            ->getQuery()
+        ;
+    }
+
 
     /*
     public function findOneBySomeField($value): ?Liquid

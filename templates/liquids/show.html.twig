@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class ="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <img src="{{ liquid.image }}" alt="card-img-top" style="width:75%;height:auto"/>
+            </div>  
+            <div class="col-md-4">
+                <h1>{{ liquid.name }}</h1>
+                <div class="text-primary mb-4">
+                    {{ liquid.price }} €
+                </div>
+                {% if app.user %}
+                    <a href="#panier" class="btn btn-primary">Ajouter au panier</a>
+                {% else %}
+                    <a href="#" class="btn btn-secondary">Connectez-vous</a> pour accéder à votre panier
+                {% endif %}
+                    <div class="row">
+            <div class="col-md-8 mt-4">
+                <h2>Caractéristiques</h2>
+                    <table class="table table-striped">
+                        <tr>
+                            <td>Catégorie</td>
+                            <td>{{ liquid.category.name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Marque</td>
+                            <td>{{ liquid.mark.name }}</td>
+                        </tr>
+                    </table>
+        </div>
+    </div>
+            </div>
+        </div>
+    </div>  
+</div>
+<div class="container mt-4">
+
+</div>
+{% endblock %}

@@ -2,15 +2,29 @@
 
 
 {% block body %}
-<style>
-    h4 { font-size: 18px; }
-    .container { display:flex; justify-content: space-between; }
-    .block { padding: 15px 10px 15px 10px; }
-    .block img:hover { background-color: #C1C3C1; }
-</style>
+
+<div align="center" class="container mb-6 mt-4">
+    <h1>Bienvenue sur E-Smoke</h1>
+
+
+    <h3>Découvrez nos nouveautés</h3>
+</div>
+
+
+<div class="home-conteneur mt-4 mb-4">
+    {% for liquid in liquids %}
+    <div class="jumbotron">
+        <div class="block">
+            <img width="250" src="{{ liquid.image }}"/>
+            <h5>{{ liquid.name }}</h5>
+            <p>Saveur {{ liquid.flavor }}</p>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 
 <div class="jumbotron">
-    <div class="container">
+    <div class="home-conteneur">
         <div class="block"> 
             <h4>4.8/5 - AVIS CLIENTS</h4>
             <p> + De 50 000 vapoteurs satisfaits !</p>
@@ -34,7 +48,7 @@
 </div>
 
 
-<div class="container mt-4">
+<div class="home-conteneur mt-4">
     <div class="block">
         <img src="{{ asset('assets/img/home_1.png') }}" />
     </div>

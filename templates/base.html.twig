@@ -12,6 +12,13 @@
         <link rel="stylesheet" href="{{ asset('build/app.css') }}">
     </head>
     <body>
+    <style>
+        h4 { font-size: 18px; }
+        .home-conteneur { display:flex; flex-wrap: wrap; justify-content: space-around; }
+        .conteneur { display:flex; flex-wrap: wrap; justify-content: space-between; }
+        .block { padding: 15px 10px 15px 10px; }
+        .block img:hover { background-color: #C1C3C1; }
+    </style>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="{{ path('home') }}">Accueil</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">

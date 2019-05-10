@@ -2,9 +2,12 @@
 
 namespace App\Form;
 
+use App\Entity\Mark;
 use App\Entity\Liquid;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class LiquidType extends AbstractType
@@ -15,8 +18,14 @@ class LiquidType extends AbstractType
             ->add('name')
             ->add('flavor')
             ->add('price')
-            ->add('category')
-            ->add('mark')
+            ->add('category',EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name'
+            ])
+            ->add('mark',EntityType::class, [
+                'class' => Mark::class,
+                'choice_label' => 'name'
+            ])
         ;
     }
 

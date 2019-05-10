@@ -15,8 +15,8 @@
     {% endfor %}
 
     <div class="conteneur">
-        <a href="{{ path('new_liquid') }}" class="btn btn-primary">Créer un nouveau produit</a>
-        <a href="{{ path('admin_categories') }}" class="btn btn-secondary">Voir les catégories</a>
+        <a href="{{ path('new_category') }}" class="btn btn-primary">Créer une nouvelle catégorie</a>
+        <a href="{{ path('admin') }}" class="btn btn-secondary">Voir les e-liquides</a>
         <a href="#" class="btn btn-secondary">Voir les marques</a>
     </div>
     
@@ -24,25 +24,21 @@
     <table class="table table-striped mt-4">
         <thead>
             <tr>
-                <th>Nom du produit</th>
-                <th>Saveur</th>
-                <th>Catégorie</th>
-                <th>Prix (€)</th>
+                <th>Nom de la catégorie</th>
+                <th>E-Liquides</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             
 
-            {% for liquid in liquids  %}
+            {% for item in items  %}
                 <tr>
-                    <td>{{ liquid.name }}</td>
-                    <td>{{ liquid.flavor }}</td>
-                    <td>{{ liquid.category.name }}</td>
-                    <td>{{ liquid.price }}</td>
+                    <td>{{ item.name }}</td>
+                    <td></td>
                     <td>
-                        <a href="{{ path('edit_liquid', { id : liquid.id }) }}" class="btn btn-primary">Editer</a>  
-                        <a href="{{ path('delete_liquid', { id : liquid.id }) }}" class="btn btn-danger">Supprimer</a> 
+                        <a href="#" class="btn btn-primary">Editer</a>  
+                        <a href="#" class="btn btn-danger">Supprimer</a> 
                      </td>
                 </tr>
 
@@ -53,7 +49,7 @@
     </table>
 
         <div class="pagination">
-            {{ knp_pagination_render(liquids) }}
+            {{ knp_pagination_render(items) }}
         </div>
 
 </div>

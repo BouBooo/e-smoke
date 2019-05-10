@@ -1,20 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello LiquidsController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    
+<div class="container mt-4">
+    <h1>Nos e-liquides</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/wamp64/www/e-smoke/src/Controller/LiquidsController.php'|file_link(0) }}">src/Controller/LiquidsController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/wamp64/www/e-smoke/templates/liquids/index.html.twig'|file_link(0) }}">templates/liquids/index.html.twig</a></code></li>
-    </ul>
+    <div class="conteneur">
+        {% for liquid in liquids %}
+    
+        <div class="block">
+            <div class="col mt-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <img width="200" src="{{ liquid.image }}"/>
+                        <h5 class="card-title mt-2">
+                            <a href="{{ path('show_liquid', { id: liquid.id }) }}">
+                                {{ liquid.name }}
+                            </a>
+                        </h5>
+                        <p class="card-text">
+                            Saveur : {{ liquid.flavor }}
+                        </p>
+                        <p class="card-text">
+                            Catégorie : {{ liquid.category.name }}
+                        </p>
+                        <p class="card-text">
+                            Marque : {{ liquid.mark.name }}
+                        </p>
+                        <div class="text-primary">
+                            {{ liquid.price }} €
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    {% endfor %}
+    </div>
+
+    <div class="pagination">
+        {{ knp_pagination_render(liquids) }}
+    </div>
 </div>
 {% endblock %}

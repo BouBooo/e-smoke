@@ -41,6 +41,11 @@ class Liquid
      */
     private $mark;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image = "https://lorempixel.com/640/480/?32411";
+
     public function getId(): ?int
     {
         return $this->id;
@@ -102,6 +107,18 @@ class Liquid
     public function setMark(?Mark $mark): self
     {
         $this->mark = $mark;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }
