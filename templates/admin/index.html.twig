@@ -24,7 +24,7 @@
     <table class="table table-striped mt-4">
         <thead>
             <tr>
-                <th>Nom du produit</th>
+                <th>Produit</th>
                 <th>Saveur</th>
                 <th>Catégorie</th>
                 <th>Prix (€)</th>
@@ -40,7 +40,7 @@
                     <td>{{ liquid.flavor }}</td>
                     <td>{{ liquid.category.name }}</td>
                     <td>{{ liquid.price }}</td>
-                    <td>
+                    <td width="28%">
                         <a href="{{ path('edit_liquid', { id : liquid.id }) }}" class="btn btn-primary">Editer</a>  
                         <a href="{{ path('delete_liquid', { id : liquid.id }) }}" class="btn btn-danger">Supprimer</a> 
                      </td>

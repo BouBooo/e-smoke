@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Liquid;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\LiquidRepository;
@@ -56,5 +57,39 @@ class AdminCategoriesController extends AbstractController
             'category' => $category,
             'form' => $form->createView()
         ]);
+    }
+
+    /**
+     * @Route("/admin/categories/edit/{id}", name="edit_category")
+     */
+    public function edit(Category $category, ObjectManager $manager, Request $request) 
+    {
+        $form = $this->createForm(CategoryType::class, $category);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $manager->flush();
+            $this->addFlash('success', 'Catégorie modifiée avec succès');
+            return $this->redirectToRoute('admin_categories');
+        }
+
+        return $this->render('admin_categories/edit.html.twig', [
+            'category' => $category,
+            'form' => $form->createView()
+        ]);
+    }
+
+
+    /**
+     * @Route("/admin//categories/delete/{id}", name="delete_category")
+     */
+    public function delete(Category  $category, ObjectManager $manager)
+    {
+        $manager->remove($category);
+        $manager->flush();
+        $this->addFlash('success', 'Catégorie supprimée avec succès');
+
+        return $this->redirectToRoute('admin_categories');
     }
 }
