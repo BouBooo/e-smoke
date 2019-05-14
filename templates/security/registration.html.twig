@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+
+{% block body %}
+
+<div class="container mt-4 ml-8">
+{{ form_start(form) }}
+    <div class="row">
+        <div class="col-5">
+          {{ form_row(form.email) }}
+        </div>
+        <div class="col-5">
+          {{ form_row(form.username) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-5">
+          {{ form_row(form.password) }}
+        </div>
+        <div class="col-5">
+          {{ form_row(form.confirmPassword) }}
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">S'inscrire</button>
+    
+  {{ form_end(form)}}
+
+  <div class="mt-4">Déjà inscrit ? <a href="{{ path('login') }}">Connectez-vous ici</a></p>
+</div>
+
+
+
+{% endblock %}

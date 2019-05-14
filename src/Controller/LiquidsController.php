@@ -18,7 +18,7 @@ class LiquidsController extends AbstractController
     {
         $items = $paginator->paginate($liquids->findAllQuery(),
                                     $request->query->getInt('page', 1),
-                                    12 // limit
+                                    20 // limit
         );
         return $this->render('liquids/index.html.twig', [
             'controller_name' => 'LiquidsController',

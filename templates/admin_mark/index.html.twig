@@ -15,16 +15,16 @@
     {% endfor %}
 
     <div class="conteneur">
-        <a href="{{ path('new_category') }}" class="btn btn-primary">Créer une nouvelle catégorie</a>
+        <a href="{{ path('new_mark') }}" class="btn btn-primary">Ajouter une nouvelle marque</a>
         <a href="{{ path('admin') }}" class="btn btn-secondary">Voir les e-liquides</a>
-        <a href="{{ path('admin_marks') }}" class="btn btn-secondary">Voir les marques</a>
+        <a href="{{ path('admin_categories') }}" class="btn btn-secondary">Voir les catégories</a>
     </div>
     
 
     <table class="table table-striped mt-4">
         <thead>
             <tr>
-                <th>Nom de la catégorie</th>
+                <th>Marque</th>
                 <th>E-Liquides</th>
                 <th>Actions</th>
             </tr>
@@ -36,9 +36,12 @@
                 <tr>
                     <td>{{ item.name }}</td>
                     <td width="33%">
+                        {% set count = 0 %}
                         {% for liquid in item.liquids %}
-                            {{ liquid.name }} <br>
+                            {% set count = count + 1 %}
                         {% endfor %}
+                        {{ count }}
+                        {% set count = 0 %}
                     </td>
                     <td>
                         <a href="{{ path('edit_category', { id : item.id }) }}" class="btn btn-primary">Editer</a>  

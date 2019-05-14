@@ -17,7 +17,7 @@
     <div class="conteneur">
         <a href="{{ path('new_liquid') }}" class="btn btn-primary">Créer un nouveau produit</a>
         <a href="{{ path('admin_categories') }}" class="btn btn-secondary">Voir les catégories</a>
-        <a href="#" class="btn btn-secondary">Voir les marques</a>
+        <a href="{{ path('admin_marks') }}" class="btn btn-secondary">Voir les marques</a>
     </div>
     
 
@@ -39,7 +39,7 @@
                     <td>{{ liquid.name }}</td>
                     <td>{{ liquid.flavor }}</td>
                     <td>{{ liquid.category.name }}</td>
-                    <td>{{ liquid.price }}</td>
+                    <td width="12%">{{ liquid.price }}</td>
                     <td width="28%">
                         <a href="{{ path('edit_liquid', { id : liquid.id }) }}" class="btn btn-primary">Editer</a>  
                         <a href="{{ path('delete_liquid', { id : liquid.id }) }}" class="btn btn-danger">Supprimer</a> 

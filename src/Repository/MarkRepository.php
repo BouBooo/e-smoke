@@ -19,6 +19,13 @@ class MarkRepository extends ServiceEntityRepository
         parent::__construct($registry, Mark::class);
     }
 
+    public function findAllQuery()
+    {
+        return $this->createQueryBuilder('m')
+            ->orderBy('m.id', 'DESC')
+            ->getQuery()
+        ;
+    }
     // /**
     //  * @return Mark[] Returns an array of Mark objects
     //  */

@@ -37,6 +37,16 @@ class LiquidRepository extends ServiceEntityRepository
         ;
     }
 
+    public function countItems()
+    {
+        return $this->createQueryBuilder('l')
+        ->select('count(l.id)')
+        ->orderBy('l.id', 'DESC')
+        ->getQuery()
+        ->getResult()
+    ;
+    }
+
 
     /*
     public function findOneBySomeField($value): ?Liquid
