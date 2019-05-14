@@ -59,6 +59,7 @@ class AdminController extends AbstractController
      */
     public function edit(Liquid $liquid, ObjectManager $manager, Request $request) 
     {
+
         $form = $this->createForm(LiquidType::class, $liquid);
         $form->handleRequest($request);
 

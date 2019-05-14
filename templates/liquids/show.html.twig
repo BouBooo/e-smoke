@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8">
-                <img src="{{ liquid.image }}" alt="card-img-top" style="width:75%;height:auto"/>
+                <img src="{{ vich_uploader_asset(liquid, 'imageFile') }}" alt="card-img-top" style="width:75%;height:auto"/>
             </div>  
             <div class="col-md-4">
                 <h1>{{ liquid.name }}</h1>
@@ -16,7 +16,7 @@
                 {% if app.user %}
                     <a href="#panier" class="btn btn-primary">Ajouter au panier</a>
                 {% else %}
-                    <a href="#" class="btn btn-secondary">Connectez-vous</a> pour accéder à votre panier
+                    <a href="{{ path('login') }}" class="btn btn-secondary">Connectez-vous</a> pour accéder à votre panier
                 {% endif %}
                     <div class="row">
             <div class="col-md-8 mt-4">

@@ -3,9 +3,14 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\LiquidRepository")
+ * @Vich\Uploadable()
  */
 class Liquid
 {
@@ -41,10 +46,22 @@ class Liquid
      */
     private $mark;
 
+
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=255)
      */
-    private $image = "https://lorempixel.com/640/480/?32411";
+    private $filename;
+
+    /**
+     * @Vich\UploadableField(mapping="liquids_images", fileNameProperty="filename")
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updated_at;
+
 
     public function getId(): ?int
     {
@@ -111,14 +128,37 @@ class Liquid
         return $this;
     }
 
-    public function getImage(): ?string
+    public function setImageFile(File $image = null)
     {
-        return $this->image;
+        $this->imageFile = $image;
+        if($this->imageFile instanceof UploadedFile) {
+            $this->updated_at = new \DateTime('now');
+        }
     }
 
-    public function setImage(?string $image): self
+    public function getImageFile()
     {
-        $this->image = $image;
+        return $this->imageFile;
+    }
+
+    public function setFilename($filename)
+    {
+        $this->filename = $filename;
+    }
+
+    public function getFilename()
+    {
+        return $this->filename;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
 
         return $this;
     }

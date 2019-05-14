@@ -13,7 +13,7 @@
             <div class="col mt-4">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <img width="200" src="{{ liquid.image }}"/>
+                        <img width="200" src="{{ vich_uploader_asset(liquid, 'imageFile') }}"/>
                         <h5 class="card-title mt-2">
                             <a href="{{ path('show_liquid', { id: liquid.id }) }}">
                                 {{ liquid.name }}
