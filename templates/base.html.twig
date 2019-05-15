@@ -34,8 +34,8 @@
         
             {% if app.user %}    
             <li class="nav-item">
-                <a class="nav-link" href="#">Mon panier</a>
-            </li>        
+                <a class="nav-link" href="{{ path('getPanier', { id : app.user.id}) }}">Mon panier</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('logout') }}">Se déconnecter</a>
             </li>

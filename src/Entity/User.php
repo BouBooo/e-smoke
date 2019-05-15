@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -43,6 +45,16 @@ class User implements UserInterface
      * @Assert\EqualTo(propertyPath="password", message="Vos mots de passe ne correspondent pas")
      */
     private $confirmPassword;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Liquid", inversedBy="users")
+     */
+    private $panier;
+
+    public function __construct()
+    {
+        $this->panier = new ArrayCollection();
+    }
 
 
     public function getId(): ?int
@@ -108,5 +120,31 @@ class User implements UserInterface
 
     public function getRoles() {
         return ['ROLE_USER'];
+    }
+
+    /**
+     * @return Collection|Liquid[]
+     */
+    public function getPanier(): Collection
+    {
+        return $this->panier;
+    }
+
+    public function addPanier(Liquid $panier): self
+    {
+        if (!$this->panier->contains($panier)) {
+            $this->panier[] = $panier;
+        }
+
+        return $this;
+    }
+
+    public function removePanier(Liquid $panier): self
+    {
+        if ($this->panier->contains($panier)) {
+            $this->panier->removeElement($panier);
+        }
+
+        return $this;
     }
 }

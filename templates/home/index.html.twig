@@ -10,17 +10,17 @@
     <h3>Découvrez nos nouveautés</h3>
 </div>
 
-
 <div class="home-conteneur mt-4 mb-4">
+    
     {% for liquid in liquids %}
-    <div class="jumbotron">
         <div class="block">
             
             <img width="150" src="{{ vich_uploader_asset(liquid, 'imageFile') }}"/>
             <h5>{{ liquid.name }}</h5>
             <p>Saveur {{ liquid.flavor }}</p>
+            <a href="{{ path('show_liquid', { id : liquid.id}) }}" class="btn btn-info">Voir</a>
         </div>
-    </div>
+    
     {% endfor %}
 </div>
 

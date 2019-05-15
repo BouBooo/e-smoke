@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PanierController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+{% if id is same as (app.user.id) %}
+    <h1>Mon panier</h1>
+    {% if panier is not empty %}
+        <table class="table table-stripped" width="50%">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th></th>
+                    <th>Saveur</th>
+                    <th>Catégorie</th>
+                    <th>Marque</th>
+                    <th>Prix (€)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+        {% for liquid in panier %}
+                <tr>
+                    <td><img src="{{ vich_uploader_asset(liquid, 'imageFile') }}" style="width:75%;height:auto"/></td>
+                    <td>{{ liquid.name }}</td>
+                    <td>{{ liquid.flavor }}</td>
+                    <td>{{ liquid.category.name }}</td>
+                    <td>{{ liquid.mark.name }}</td>
+                    <td style="text-align:center" width="12%">{{ liquid.price }}.00 </td>
+                    <td width="12%">  
+                        <a href="#" class="btn btn-danger">Supprimer</a> 
+                     </td>
+                </tr>
+        {% endfor %}
+
+        </table>
+    {% else %}
+        <p>Panier vide.. </p>
+    {% endif %}
+
+{% else %} 
+    <div align="center" class="container mt-4">
+        <a href="{{ path('home') }}" class="btn btn-primary"> Revenir au menu </a>
+    </div>
+{% endif %}
+</div>
+{% endblock %}
