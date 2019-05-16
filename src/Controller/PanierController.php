@@ -13,16 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class PanierController extends AbstractController
 {
-
-    private $em;
-    private $repository;
-
-    public function __construct(ObjectManager $em, LiquidRepository $repository) {
-        $this->em = $em;
-        $this->repository = $repository;
-    }
-
-
     /**
      * @Route("/panier/{id}", name="getPanier")
      */
@@ -31,7 +21,6 @@ class PanierController extends AbstractController
         $panier = $user->getPanier();
 
         return $this->render('panier/index.html.twig', [
-            'controller_name' => 'PanierController',
             'panier' => $panier,
             'id' => $id
         ]);
@@ -52,6 +41,43 @@ class PanierController extends AbstractController
         $manager->persist($panier);
         $manager->flush();
 
+        return $this->redirectToRoute('getPanier', [
+            'id' => $userId
+        ]);
+    }
+
+    /**
+     * @Route("/liquids/{id}/remove", name="removeFromPanier")
+     */
+    public function removeFromPanier($id, Liquid $liquid, LiquidRepository $repo, UserRepository $user_repo, UserInterface $userInt, ObjectManager $manager) {
+        $userId = $userInt->getId();
+        $userInfos = $user_repo->find($userId); 
+
+        $item = $repo->find($id);
+
+        // Remove liquid from panier
+        $panier = $userInfos->removePanier($item);
+        $manager->persist($panier);
+        $manager->flush();
+
+        return $this->redirectToRoute('getPanier', [
+            'id' => $userId
+        ]);
+    }
+    
+    /**
+     * @Route("/panier/{id}/clean", name="clean_panier")
+     */
+    public function cleanPanier(User $user, ObjectManager $manager)
+    {
+        $userId = $user->getId();
+        $liquids = $user->getPanier();
+
+        foreach($liquids as $liquid) {
+            $clean = $user->removePanier($liquid);
+            $manager->persist($clean);
+            $manager->flush();
+        }
         return $this->redirectToRoute('getPanier', [
             'id' => $userId
         ]);

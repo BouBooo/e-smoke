@@ -55,4 +55,35 @@ class AdminMarkController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+    /**
+     * @Route("/admin/mark/edit/{id}", name="edit_mark")
+     */
+    public function edit(Mark $mark, ObjectManager $manager, Request $request) {
+        $form = $this->createForm(MarkType::class, $mark);
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
+        {
+            $manager->flush();
+            $this->addFlash('success', 'Marque modifiée avec succès');
+            return $this->redirectToRoute('admin_marks');
+        }
+
+        return $this->render('admin_mark/edit.html.twig', [
+            'mark' => $mark,
+            'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/admin/marks/delete/{id}", name="delete_mark")
+     */
+    public function delete(Mark $mark, ObjectManager $manager) {
+        $manager->remove($mark);
+        $manager->flush();
+        $this->addFlash('success', 'Marque supprimée avec succès');
+
+        return $this->redirectToRoute('admin_marks');
+    }
 }

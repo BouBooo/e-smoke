@@ -69,6 +69,11 @@ class Liquid
      */
     private $users;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $about;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -199,6 +204,18 @@ class Liquid
             $this->users->removeElement($user);
             $user->removePanier($this);
         }
+
+        return $this;
+    }
+
+    public function getAbout(): ?string
+    {
+        return $this->about;
+    }
+
+    public function setAbout(?string $about): self
+    {
+        $this->about = $about;
 
         return $this;
     }

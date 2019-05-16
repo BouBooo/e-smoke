@@ -69,6 +69,7 @@ class AdminCategoriesController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
+            $manager->persist($category);
             $manager->flush();
             $this->addFlash('success', 'Catégorie modifiée avec succès');
             return $this->redirectToRoute('admin_categories');

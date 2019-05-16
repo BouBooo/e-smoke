@@ -1,22 +1,16 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PanierController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
+<div class="container">
 {% if id is same as (app.user.id) %}
     <h1>Mon panier</h1>
     {% if panier is not empty %}
-        <table class="table table-stripped" width="50%">
+        <table class="table table-bordered" width="100%">
             <thead>
                 <tr>
                     <th>Produit</th>
-                    <th></th>
+                    <th>Nom</th>
                     <th>Saveur</th>
                     <th>Catégorie</th>
                     <th>Marque</th>
@@ -25,23 +19,44 @@
                 </tr>
             </thead>
             <tbody>
+        {% set count = 0 %}
         {% for liquid in panier %}
-                <tr>
-                    <td><img src="{{ vich_uploader_asset(liquid, 'imageFile') }}" style="width:75%;height:auto"/></td>
-                    <td>{{ liquid.name }}</td>
+            {% set count = count + liquid.price %}
+                <tr>    
+                    <td width="20%"><img src="{{ vich_uploader_asset(liquid, 'imageFile') }}" style="width:50%;height:auto"/></td>
+                    <td><a href="{{ path('show_liquid', { id : liquid.id }) }}">{{ liquid.name }}</a></td>
                     <td>{{ liquid.flavor }}</td>
                     <td>{{ liquid.category.name }}</td>
                     <td>{{ liquid.mark.name }}</td>
-                    <td style="text-align:center" width="12%">{{ liquid.price }}.00 </td>
+                    <td width="12%">{{ liquid.price }}.00 </td>
                     <td width="12%">  
-                        <a href="#" class="btn btn-danger">Supprimer</a> 
+                        <a href="{{ path('removeFromPanier', { id : liquid.id }) }}" class="btn btn-danger">Supprimer</a> 
                      </td>
                 </tr>
         {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>Total panier : </b></td>
+                    <td><b>{{ count }}.00 €<b></td>
+                    <td></td>
+                </tr>
 
         </table>
+
+        <div class="mb-4" style="float:right">
+            <a href="#" class="btn btn-info">Finaliser ma commande</a>
+        </div>
+        <div class="mb-4" style="float:left">
+            <a href="{{ path('clean_panier', { id : app.user.id }) }}" class="btn btn-danger">Vider mon panier</a>
+        </div>
     {% else %}
-        <p>Panier vide.. </p>
+    <div class="jumbotron mt-4">
+        <p>Ce panier est vide.</p>
+        <p>N'hésitez pas à consulter notre gamme de produits e-liquids <a href="{{ path('liquids') }}">ici </a></p>
+    </div>
     {% endif %}
 
 {% else %} 
