@@ -4,7 +4,19 @@
 
 <div class="container">
 {% if id is same as (app.user.id) %}
+
+    <div class="jumbotron">
+        <div class="conteneur">
+        <img src="https://img.icons8.com/ios-glyphs/50/000000/add-shopping-cart.png">
+        <img src="https://img.icons8.com/material-rounded/48/000000/user.png">
+        <img src="https://img.icons8.com/metro/52/000000/truck.png">
+        <img src="https://img.icons8.com/metro/52/000000/bank-cards.png">
+        <img src="https://img.icons8.com/color/48/000000/checkmark.png">
+        </div>
+    </div>
+
     <h1>Mon panier</h1>
+
     {% if panier is not empty %}
         <table class="table table-bordered" width="100%">
             <thead>

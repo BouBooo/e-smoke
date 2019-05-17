@@ -58,4 +58,45 @@
         <img src="{{ asset('assets/img/home_2.png') }}" />
     </div>
 </div>
+
+<section id="contact">
+    <div align="center">
+        <div class="jumbotron">
+            <h3>Contact</h3>
+            <hr width="20%">
+            <div class="d-flex justify-content-center" style="">
+                    {{ form_start(form) }}
+                <div class="row mt-4">
+                    <div class="col-5">
+                        {{ form_row(form.firstname) }}
+                    </div>
+                    <div class="col-5">
+                        {{ form_row(form.lastname) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-5">
+                        {{ form_row(form.email) }}
+                    </div>
+                    <div class="col-5">
+                        {{ form_row(form.phone) }}
+                    </div>
+                    <div class="col-6">
+                        {{ form_row(form.message) }}
+                    </div>
+                    <button type="submit" class="btn btn-info">Envoyer</button>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+            <div class="container mt-4" style="width:25%">
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
