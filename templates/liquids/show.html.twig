@@ -13,6 +13,9 @@
                 <div class="text-primary mb-4">
                     {{ liquid.price }} €
                 </div>
+                <div class="col">
+                    {{ liquid.about }}
+                </div>
                 {% if app.user %}
                     <a href="{{ path('addToPanier', { id : liquid.id } )}}" class="btn btn-primary">Ajouter au panier</a>
                 {% else %}

@@ -2,6 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Liquid;
+use App\Entity\LiquidSearch;
+use App\Form\LiquidSearchType;
 use App\Repository\LiquidRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,13 +19,18 @@ class LiquidsController extends AbstractController
      */
     public function index(LiquidRepository $liquids, PaginatorInterface $paginator, Request $request)
     {
+        $search = new LiquidSearch();
+        $form = $this->createForm(LiquidSearchType::class, $search);
+        $form->handleRequest($request);
+
         $items = $paginator->paginate($liquids->findAllQuery(),
                                     $request->query->getInt('page', 1),
-                                    20 // limit
+                                    12 // limit
         );
         return $this->render('liquids/index.html.twig', [
             'controller_name' => 'LiquidsController',
-            'liquids' => $items
+            'liquids' => $items,
+            'form' => $form->createView()
         ]);
     }
 

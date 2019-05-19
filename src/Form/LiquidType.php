@@ -13,6 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class LiquidType extends AbstractType
 {
@@ -36,6 +37,7 @@ class LiquidType extends AbstractType
                 'required' => false,
                 'label' => 'Image'
             ])
+            ->add('about', TextareaType::class, $this->formAttr('Description'))
         ;
     }
 
