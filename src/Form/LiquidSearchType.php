@@ -36,7 +36,7 @@ class LiquidSearchType extends AbstractType
     {
         $resolver->setDefaults([
             'method' => 'get',
-            'csrf_protection' => false
+            'csrf_protection' => false,
         ]);
     }
 

@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Liquid;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\LiquidSearch;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Liquid|null find($id, $lockMode = null, $lockVersion = null)
@@ -33,8 +34,29 @@ class LiquidRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('l')
             ->orderBy('l.id', 'DESC')
-            ->getQuery()
         ;
+    }
+
+    public function findAllParamQuery(LiquidSearch $search)
+    {
+        $query = $this->findAllQuery();
+
+        if($search->getCategory())
+        {
+            $query = $query
+                    ->andWhere('l.category = :category')
+                    ->setParameter('category', $search->getCategory());
+        }
+
+        if($search->getMark())
+        {
+            $query = $query
+                    ->andWhere('l.mark = :mark')
+                    ->setParameter('mark', $search->getMark());
+        }
+
+        return $query->getQuery();
+
     }
 
     public function countItems()
@@ -44,8 +66,9 @@ class LiquidRepository extends ServiceEntityRepository
         ->orderBy('l.id', 'DESC')
         ->getQuery()
         ->getResult()
-    ;
+        ;
     }
+
 
 
     /*

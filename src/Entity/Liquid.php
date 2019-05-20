@@ -16,6 +16,21 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class Liquid
 {
+
+    const DOSAGE = [
+        0 => '0mg',
+        1 => '3mg',
+        2 => '6mg',
+        3 => '9mg',
+        4 => '12mg'
+    ];
+
+    const CAPACITY = [
+        0 => '10ml',
+        1 => '20ml',
+        2 => '50ml'
+    ];
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -74,9 +89,22 @@ class Liquid
      */
     private $about;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $capacity;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $dosage;
+
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
+        $this->capacity = new ArrayCollection();
+        $this->dosage = new ArrayCollection();
     }
 
 
@@ -216,6 +244,50 @@ class Liquid
     public function setAbout(?string $about): self
     {
         $this->about = $about;
+
+        return $this;
+    }
+
+    public function getCapacity(): ?int
+    {
+        return $this->capacity;
+    }
+
+    public function getCapacityType()
+    {
+        return self::CAPACITY[$this->capacity];
+    }
+
+    public function getChoiceCapacity()
+    {
+        return self::CAPACITY;
+    }
+
+    public function setCapacity(int $capacity): self
+    {
+        $this->capacity = $capacity;
+
+        return $this;
+    }
+
+    public function getDosage(): ?int
+    {
+        return $this->dosage;
+    }
+
+    public function getDosageType()
+    {
+        return self::DOSAGE[$this->dosage];
+    }
+
+    public function getChoiceDosage()
+    {
+        return self::DOSAGE;
+    }
+
+    public function setDosage(int $dosage): self
+    {
+        $this->dosage = $dosage;
 
         return $this;
     }

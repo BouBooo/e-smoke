@@ -7,15 +7,27 @@
 
     <div class="jumbotron">
         <div class="conteneur">
-        <img src="https://img.icons8.com/ios-glyphs/50/000000/add-shopping-cart.png">
-        <img src="https://img.icons8.com/material-rounded/48/000000/user.png">
-        <img src="https://img.icons8.com/metro/52/000000/truck.png">
-        <img src="https://img.icons8.com/metro/52/000000/bank-cards.png">
-        <img src="https://img.icons8.com/color/48/000000/checkmark.png">
+            <img src="https://img.icons8.com/ios-glyphs/50/000000/add-shopping-cart.png">
+            <div class="col mt-2"><hr></div>
+            <img src="https://img.icons8.com/material-rounded/48/000000/user.png">
+            <div class="col mt-2"><hr></div>
+            <img src="https://img.icons8.com/metro/52/000000/truck.png">
+            <div class="col mt-2"><hr></div>
+            <img src="https://img.icons8.com/metro/52/000000/bank-cards.png">
+            <div class="col mt-2"><hr></div>
+            <img src="https://img.icons8.com/color/48/000000/checkmark.png">
+        </div>
+        <div class="conteneur">
+            <p>Panier</p>
+            <p>Coordonnées</p>
+            <p>Livraison</p>
+            <p>Paiement</p>
+            <p>Confirmation</p>
         </div>
     </div>
-
-    <h1>Mon panier</h1>
+    <div class="mb-4" align="center">
+        <h1>Mon panier</h1>
+    </div>
 
     {% if panier is not empty %}
         <table class="table table-bordered" width="100%">
@@ -23,10 +35,10 @@
                 <tr>
                     <th>Produit</th>
                     <th>Nom</th>
-                    <th>Saveur</th>
                     <th>Catégorie</th>
                     <th>Marque</th>
                     <th>Prix (€)</th>
+                    <th>Quantité</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -35,24 +47,41 @@
         {% for liquid in panier %}
             {% set count = count + liquid.price %}
                 <tr>    
-                    <td width="20%"><img src="{{ vich_uploader_asset(liquid, 'imageFile') }}" style="width:50%;height:auto"/></td>
+                    <td width="30%">
+                        <div class="row">
+                            <div class="col">
+                                <img src="{{ vich_uploader_asset(liquid, 'imageFile') }}" style="width:75%;height:auto"/>
+                            </div>
+                            <div class="col">
+                                Capacité : {{ liquid.capacityType }}
+                                Nicotine : {{ liquid.dosageType }}
+                            </div>
+                        </div>
+                    </td>
                     <td><a href="{{ path('show_liquid', { id : liquid.id }) }}">{{ liquid.name }}</a></td>
-                    <td>{{ liquid.flavor }}</td>
                     <td>{{ liquid.category.name }}</td>
                     <td>{{ liquid.mark.name }}</td>
                     <td width="12%">{{ liquid.price }}.00 </td>
-                    <td width="12%">  
-                        <a href="{{ path('removeFromPanier', { id : liquid.id }) }}" class="btn btn-danger">Supprimer</a> 
-                     </td>
+                    <td width="12%">   
+                        <div class="row">
+                            <input class="form-group" type="number" name="quantity" min="0" max="10" step="1" value="1">
+                        </div>
+                    </td>
+                    <td>
+                    <a href="{{ path('removeFromPanier', { id : liquid.id }) }}">
+                        <img src="https://img.icons8.com/metro/32/000000/waste.png">
+                    </a>    
+                    </td>
+
                 </tr>
         {% endfor %}
                 <tr>
                     <td></td>
                     <td></td>
                     <td></td>
-                    <td></td>
                     <td><b>Total panier : </b></td>
                     <td><b>{{ count }}.00 €<b></td>
+                    <td></td>   
                     <td></td>
                 </tr>
 

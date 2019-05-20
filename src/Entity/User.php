@@ -130,12 +130,13 @@ class User implements UserInterface
         return $this->panier;
     }
 
-    public function addPanier(Liquid $panier): self
+    public function addPanier(Liquid $panier, int $capacity, int $dosage): self
     {
         if (!$this->panier->contains($panier)) {
             $this->panier[] = $panier;
         }
-
+        $panier->setCapacity($capacity);
+        $panier->setDosage($dosage);
         return $this;
     }
 

@@ -16,7 +16,7 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier/{id}", name="getPanier")
      */
-    public function getPanier(User $user, int $id)
+    public function getPanier(User $user, int $id, LiquidRepository $repo)
     {
         $panier = $user->getPanier();
 
@@ -26,18 +26,24 @@ class PanierController extends AbstractController
         ]);
     }
 
+
     /**
      * @Route("/liquids/{id}/add", name="addToPanier")
      */
     public function addToPanier($id, Liquid $liquid, LiquidRepository $repo, UserRepository $user_repo, UserInterface $userInt, ObjectManager $manager) {
-        //User
+        // Get liquid params
+        $dosage = $_POST['dosage'];
+        $capacity = $_POST['capacity'];
+
+        // Get user
         $userId = $userInt->getId();
         $userInfos = $user_repo->find($userId); 
-        // Liquid
+
+        // Get liquid
         $item = $repo->find($id);
 
         // Add liquid to panier
-        $panier = $userInfos->addPanier($item);
+        $panier = $userInfos->addPanier($item, $capacity, $dosage);
         $manager->persist($panier);
         $manager->flush();
 
@@ -54,6 +60,7 @@ class PanierController extends AbstractController
         $userInfos = $user_repo->find($userId); 
 
         $item = $repo->find($id);
+
 
         // Remove liquid from panier
         $panier = $userInfos->removePanier($item);
@@ -82,5 +89,4 @@ class PanierController extends AbstractController
             'id' => $userId
         ]);
     }
-
 }

@@ -23,7 +23,8 @@ class LiquidsController extends AbstractController
         $form = $this->createForm(LiquidSearchType::class, $search);
         $form->handleRequest($request);
 
-        $items = $paginator->paginate($liquids->findAllQuery(),
+
+        $items = $paginator->paginate($liquids->findAllParamQuery($search),
                                     $request->query->getInt('page', 1),
                                     12 // limit
         );
@@ -37,11 +38,16 @@ class LiquidsController extends AbstractController
     /**
      * @Route("liquids/{id}", name="show_liquid")
      */
-    public function show($id, Request $request, ObjectManager $manager, LiquidRepository $liquids)
+    public function show($id, Request $request, ObjectManager $manager, LiquidRepository $liquids, Liquid $liquid)
     {
+        $dosage = $liquid->getChoiceDosage();
+        $capacity = $liquid->getChoiceCapacity();
+
         $item = $liquids->find($id);
         return $this->render('liquids/show.html.twig', [
-            'liquid' => $item
+            'liquid' => $item,
+            'dosage' => $dosage,
+            'capacity' => $capacity
         ]);
     }
 }

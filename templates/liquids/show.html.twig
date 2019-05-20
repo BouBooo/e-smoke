@@ -17,7 +17,34 @@
                     {{ liquid.about }}
                 </div>
                 {% if app.user %}
-                    <a href="{{ path('addToPanier', { id : liquid.id } )}}" class="btn btn-primary">Ajouter au panier</a>
+                    <form action="{{ path('addToPanier', { id : liquid.id }) }}" method="POST">
+                        <div class="row">
+                            <div class="col-3">
+                                <label for="dosage">Nicotine</label>
+                            </div>
+                            <div class="col-5">
+                                <select class="form-control mb-4" name="dosage">
+                                    {% for key, value in dosage %}
+                                            <option value="{{ key }}">{{ value }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <label for="dosage">Contenance</label>
+                            </div>
+                            <div class="col-5">
+                                <select class="form-control mb-4" name="capacity">
+                                    {% for key, value in capacity %}
+                                            <option value="{{ key }}">{{ value }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" href="{{ path('addToPanier', { id : liquid.id } )}}" class="btn btn-primary">Ajouter au panier</button>
+                    </form>
+                    
                 {% else %}
                     <a href="{{ path('login') }}" class="btn btn-secondary">Connectez-vous</a> pour accéder à votre panier
                 {% endif %}
